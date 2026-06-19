@@ -691,7 +691,7 @@ export default function Portfolio() {
             </div>
             <div className="about-card">
               <h3 className="syne">Trayectoria</h3>
-              {[{y:"2026",t:"AI PrompT Day",s:"Producción de contenido y comunicación — Barcelona"},{y:"2024–hoy",t:"Paraleia",s:"Comunicación digital y contenidos"},{y:"2015–hoy",t:"Carlucci Propiedades",s:"Dirección de Marketing Digital"},{y:"2012–hoy",t:"Marketing Digital",s:"10+ años de experiencia"}].map((t,i)=>(
+              {[{y:"2026",t:"AI PrompT Day",s:"Colaboración en producción de contenido — Barcelona"},{y:"2025",t:"Posgrado Marketing Digital e IA",s:"Universitat Pompeu Fabra"},{y:"2024",t:"The Plan Company",s:"Responsable de cuentas en marketing digital"},{y:"2015–hoy",t:"Carlucci Propiedades",s:"Content Creator / Social Media Manager"},{y:"2015–hoy",t:"Paraleia",s:"Comunicación digital y contenidos"},{y:"2015–2024",t:"Los Marlon Brando",s:"Manager, Community Manager & Content Creator"}].map((t,i)=>(
                 <div className="timeline-item" key={i}>
                   <div className="tl-dot"/>
                   <div><div className="tl-year">{t.y}</div><div className="tl-title">{t.t}</div><div className="tl-sub">{t.s}</div></div>

@@ -364,11 +364,6 @@ function CaseCarlucci({ t }) {
               <div className="action-item" key={i}><span className="action-dot"/>{a}</div>
             ))}
           </div>
-          <div className="video-block" style={{marginTop:"2rem"}}>
-            <div className="video-label">{t.serpLabel}</div>
-            <video src={serpVideo} autoPlay loop muted playsInline preload="metadata" width="768" height="432" aria-label={t.serpCaption} style={{width:"100%",height:"auto",borderRadius:"14px",display:"block",border:"1px solid #eee"}}/>
-            <p style={{fontSize:"0.85rem",color:"#666",marginTop:"0.6rem"}}>{t.serpCaption}</p>
-          </div>
           <div className="process-step" style={{marginTop:"2rem"}}><div className="step-num">3</div><div className="step-body"><h3>{t.step3T}</h3><p>{t.step3P}</p></div></div>
         </div>
         <div className="cs-section">
@@ -377,6 +372,11 @@ function CaseCarlucci({ t }) {
             {t.results.map((r,i)=>(
               <div className="result-card" key={i}><div className="result-num">{r.num}</div><div className="result-label">{r.l}</div></div>
             ))}
+          </div>
+          <div className="video-block" style={{marginTop:"2rem"}}>
+            <div className="video-label">{t.serpLabel}</div>
+            <video src={serpVideo} autoPlay loop muted playsInline preload="metadata" width="768" height="432" aria-label={t.serpCaption} style={{width:"100%",height:"auto",borderRadius:"14px",display:"block",border:"1px solid #eee"}}/>
+            <p style={{fontSize:"0.85rem",color:"#666",marginTop:"0.6rem"}}>{t.serpCaption}</p>
           </div>
           <div className="final-statement" style={{marginTop:"2rem"}}>
             <h3>{t.finalT}</h3>

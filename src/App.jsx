@@ -44,7 +44,7 @@ const styles = `
   backdrop-filter: blur(12px);
     transition: box-shadow 0.3s;
   }
-  .nav-brand { font-family: 'Nunito', sans-serif; font-weight: 800; font-size: 1.05rem; letter-spacing: -0.01em; color: #ffffff; cursor: pointer; }
+  .nav-brand { font-family: 'Nunito', sans-serif; font-weight: 800; font-size: 0.95rem; letter-spacing: 0.02em; line-height: 1.15; color: #ffffff; cursor: pointer; }
   .nav-brand span { color: #ffffff; }
   .nav-links { display: flex; gap: 2.5rem; list-style: none; }
   .nav-links a { font-size: 0.875rem; font-weight: 500; color: rgba(255,255,255,0.85); text-decoration: none; transition: color 0.2s; cursor: pointer; position: relative; }
@@ -309,7 +309,7 @@ const ArrowRight = () => (
 function NavBar({ onGoHome, scrolled, t, lang, setLang }) {
   return (
     <nav style={{ boxShadow: scrolled ? "0 2px 20px rgba(0,0,0,0.08)" : "none" }}>
-      <div className="nav-brand syne" onClick={onGoHome}>FRANCISCO <span>C.</span></div>
+      <div className="nav-brand syne" onClick={onGoHome}>FRANCISCO<br/><span>CARLUCCI</span></div>
       <ul className="nav-links">
         <li><a href="#sobre-mi" onClick={onGoHome}>{t.nav.about}</a></li>
         <li><a href="#portfolio" onClick={onGoHome}>{t.nav.cases}</a></li>
@@ -680,7 +680,7 @@ export default function Portfolio() {
         <div className="hero-content">
           <div>
             <div className="hero-badge">{t.hero.badge}</div>
-            <h1 className="syne">{t.hero.hello}<br/>{t.hero.im} <em>Francisco</em><br/>Carlucci</h1>
+            <h1 className="syne">{t.hero.hello}<br/>{t.hero.im} <em>Francisco</em><br/><em>Carlucci</em></h1>
             <p className="hero-desc">{t.hero.desc}</p>
             <div className="hero-ctas">
               <a href="#portfolio" className="btn-primary">{t.hero.ctaCases}</a>

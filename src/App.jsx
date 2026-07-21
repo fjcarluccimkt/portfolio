@@ -6,6 +6,7 @@ import imgAvatar from './assets/avatar.webp';
 import imgCaseCarlucci from './assets/case-carlucci.webp';
 import imgCaseBatech from './assets/case-batech.webp';
 import imgCasePromptday from './assets/case-promptday.webp';
+import serpVideo from './assets/serp-carlucci.mp4';
 
 const styles = `
 
@@ -362,6 +363,11 @@ function CaseCarlucci({ t }) {
             {t.actions.map((a,i)=>(
               <div className="action-item" key={i}><span className="action-dot"/>{a}</div>
             ))}
+          </div>
+          <div className="video-block" style={{marginTop:"2rem"}}>
+            <div className="video-label">{t.serpLabel}</div>
+            <video src={serpVideo} autoPlay loop muted playsInline preload="metadata" width="768" height="432" aria-label={t.serpCaption} style={{width:"100%",height:"auto",borderRadius:"14px",display:"block",border:"1px solid #eee"}}/>
+            <p style={{fontSize:"0.85rem",color:"#666",marginTop:"0.6rem"}}>{t.serpCaption}</p>
           </div>
           <div className="process-step" style={{marginTop:"2rem"}}><div className="step-num">3</div><div className="step-body"><h3>{t.step3T}</h3><p>{t.step3P}</p></div></div>
         </div>

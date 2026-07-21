@@ -9,6 +9,8 @@ import imgCasePromptday from './assets/case-promptday.webp';
 import serpVideo from './assets/serp-carlucci.mp4';
 import contenido1 from './assets/contenido-1.mp4';
 import contenido2 from './assets/contenido-2.mp4';
+import fachadaAntes from './assets/fachada-antes.webp';
+import fachadaDespues from './assets/fachada-despues.webp';
 
 const styles = `
 
@@ -359,6 +361,11 @@ function CaseCarlucci({ t }) {
             <div className="logo-box"><div className="logo-box-label">{t.logoBefore}</div><img src={imgLogoAnterior} loading="lazy" decoding="async" width="1470" height="426" alt="Logo anterior Inmobiliaria Carlucci" style={{width:"100%",maxWidth:"260px",height:"auto",objectFit:"contain"}}/></div>
             <div style={{fontSize:"1.5rem",color:"#ccc"}}>→</div>
             <div className="logo-box"><div className="logo-box-label">{t.logoAfter}</div><img src={imgLogoRedisenio} loading="lazy" decoding="async" width="856" height="322" alt="Carlucci Propiedades logo" style={{width:"100%",maxWidth:"260px",height:"auto",objectFit:"contain"}}/></div>
+          </div>
+          <div className="logo-compare" style={{marginTop:"1rem"}}>
+            <div className="logo-box"><div className="logo-box-label">{t.officeBefore}</div><img src={fachadaAntes} loading="lazy" decoding="async" width="900" height="776" alt="Fachada anterior de Inmobiliaria Carlucci" style={{width:"100%",maxWidth:"340px",height:"auto",borderRadius:"10px"}}/></div>
+            <div style={{fontSize:"1.5rem",color:"#ccc"}}>→</div>
+            <div className="logo-box"><div className="logo-box-label">{t.officeAfter}</div><img src={fachadaDespues} loading="lazy" decoding="async" width="489" height="378" alt="Fachada renovada de Carlucci Propiedades" style={{width:"100%",maxWidth:"340px",height:"auto",borderRadius:"10px"}}/></div>
           </div>
           <div className="process-step" style={{marginTop:"2rem"}}><div className="step-num">2</div><div className="step-body"><h3>{t.step2T}</h3><p>{t.step2P}</p></div></div>
           <div className="actions-grid">

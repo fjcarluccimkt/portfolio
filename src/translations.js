@@ -1,5 +1,6 @@
 export const STR = {
   es: {
+    meta: { description: "Social Media Manager y Content Creator en Barcelona. Más de 10 años construyendo presencia digital con estrategia, contenido e inteligencia artificial aplicada." },
     nav: { about: "Sobre mí", cases: "Casos de estudio", contact: "Contacto" },
     skip: "Saltar al contenido",
     hero: {
@@ -226,6 +227,7 @@ export const STR = {
   },
 
   en: {
+    meta: { description: "Social Media Manager and Content Creator in Barcelona. 10+ years building digital presence through strategy, content and applied artificial intelligence." },
     nav: { about: "About me", cases: "Case studies", contact: "Contact" },
     skip: "Skip to content",
     hero: {

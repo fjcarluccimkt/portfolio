@@ -8,7 +8,6 @@ import imgCaseBatech from './assets/case-batech.webp';
 import imgCasePromptday from './assets/case-promptday.webp';
 
 const styles = `
-  @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800;900&family=Baloo+2:wght@600;700;800&display=swap');
 
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -50,6 +49,8 @@ const styles = `
   .lang-toggle button { border: 0; background: transparent; color: rgba(255,255,255,0.7); font-size: 0.75rem; font-weight: 700; padding: 0.25rem 0.6rem; border-radius: 999px; cursor: pointer; transition: all 0.2s; font-family: inherit; }
   .lang-toggle button:hover { color: #fff; }
   .lang-toggle button.active { background: #fff; color: #C13483; }
+  button.case-link { background: none; border: 0; padding: 0; font: inherit; text-align: left; cursor: pointer; }
+  button.case-link:focus-visible, .lang-toggle button:focus-visible { outline: 2px solid #E05453; outline-offset: 3px; border-radius: 4px; }
   .nav-links a:hover::after { width: 100%; }
 
   .hero {
@@ -138,7 +139,7 @@ const styles = `
   .li-visual { width: 100%; height: 140px; border-radius: 12px; margin-bottom: 1.25rem; display: flex; align-items: center; justify-content: center; font-size: 3rem; }
   .li1 { background: linear-gradient(135deg, rgba(107,79,187,0.4), rgba(107,79,187,0.1)); }
   .li2 { background: linear-gradient(135deg, rgba(232,85,62,0.4), rgba(232,85,62,0.1)); }
-  .linkedin-card h4 { font-family: 'Nunito', sans-serif; font-size: 1rem; font-weight: 700; color: #fff; margin-bottom: 0.5rem; line-height: 1.3; }
+  .linkedin-card h3 { font-family: 'Nunito', sans-serif; font-size: 1rem; font-weight: 700; color: #fff; margin-bottom: 0.5rem; line-height: 1.3; }
   .linkedin-card p { font-size: 0.83rem; color: rgba(255,255,255,0.85); line-height: 1.6; font-weight: 400; margin-bottom: 1.25rem; }
   .li-link { font-size: 0.8rem; font-weight: 600; color: #F5A623; text-decoration: none; display: flex; align-items: center; gap: 0.35rem; }
 
@@ -247,7 +248,7 @@ const styles = `
   .result-label { font-size: 0.8rem; color: rgba(255,255,255,0.7); margin-top: 0.5rem; font-weight: 400; line-height: 1.4; }
   .process-step { display: flex; gap: 1.5rem; margin-bottom: 2rem; align-items: flex-start; }
   .step-num { width: 40px; height: 40px; border-radius: 50%; background: linear-gradient(135deg, #E05453, #C13483); display: flex; align-items: center; justify-content: center; font-family: 'Nunito', sans-serif; font-weight: 800; font-size: 0.9rem; color: #fff; flex-shrink: 0; }
-  .step-body h4 { font-family: 'Nunito', sans-serif; font-weight: 700; font-size: 1rem; margin-bottom: 0.4rem; color: #1A1A2E; }
+  .step-body h3 { font-family: 'Nunito', sans-serif; font-weight: 700; font-size: 1rem; margin-bottom: 0.4rem; color: #1A1A2E; }
   .step-body p { font-size: 0.88rem; color: #555; line-height: 1.6; font-weight: 400; margin: 0; }
   .logo-compare { display: flex; gap: 2rem; align-items: center; margin-top: 1.5rem; flex-wrap: wrap; }
   .logo-box { background: #fff; border-radius: 16px; padding: 2rem; flex: 1; min-width: 200px; text-align: center; border: 1.5px solid rgba(26,26,46,0.08); }
@@ -280,7 +281,7 @@ const styles = `
 `;
 
 const ArrowRight = () => (
-  <svg width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+  <svg width="16" height="16" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
     <path d="M5 12h14M12 5l7 7-7 7"/>
   </svg>
 );
@@ -336,7 +337,7 @@ function CaseCarlucci({ t }) {
           <p>{t.contextP}</p>
           <div className="problems-grid">
             {t.problems.map((p, i) => (
-              <div className="problem-item" key={i}><span className="problem-icon">✗</span><span className="problem-text">{p}</span></div>
+              <div className="problem-item" key={i}><span className="problem-icon" aria-hidden="true">✗</span><span className="problem-text">{p}</span></div>
             ))}
           </div>
         </div>
@@ -344,25 +345,25 @@ function CaseCarlucci({ t }) {
           <h2>{t.goalsTitle}</h2>
           <div className="goals-grid">
             {t.goals.map((g,i)=>(
-              <div className="goal-card" key={i}><div className="goal-icon">{g.icon}</div><div className="goal-title">{g.t}</div><div className="goal-desc">{g.d}</div></div>
+              <div className="goal-card" key={i}><div className="goal-icon" aria-hidden="true">{g.icon}</div><div className="goal-title">{g.t}</div><div className="goal-desc">{g.d}</div></div>
             ))}
           </div>
         </div>
         <div className="cs-section">
           <h2>{t.processTitle}</h2>
-          <div className="process-step"><div className="step-num">1</div><div className="step-body"><h4>{t.step1T}</h4><p>{t.step1P}</p></div></div>
+          <div className="process-step"><div className="step-num">1</div><div className="step-body"><h3>{t.step1T}</h3><p>{t.step1P}</p></div></div>
           <div className="logo-compare">
             <div className="logo-box"><div className="logo-box-label">{t.logoBefore}</div><img src={imgLogoAnterior} loading="lazy" decoding="async" width="1470" height="426" alt="Logo anterior Inmobiliaria Carlucci" style={{width:"100%",maxWidth:"260px",height:"auto",objectFit:"contain"}}/></div>
             <div style={{fontSize:"1.5rem",color:"#ccc"}}>→</div>
             <div className="logo-box"><div className="logo-box-label">{t.logoAfter}</div><img src={imgLogoRedisenio} loading="lazy" decoding="async" width="856" height="322" alt="Carlucci Propiedades logo" style={{width:"100%",maxWidth:"260px",height:"auto",objectFit:"contain"}}/></div>
           </div>
-          <div className="process-step" style={{marginTop:"2rem"}}><div className="step-num">2</div><div className="step-body"><h4>{t.step2T}</h4><p>{t.step2P}</p></div></div>
+          <div className="process-step" style={{marginTop:"2rem"}}><div className="step-num">2</div><div className="step-body"><h3>{t.step2T}</h3><p>{t.step2P}</p></div></div>
           <div className="actions-grid">
             {t.actions.map((a,i)=>(
               <div className="action-item" key={i}><span className="action-dot"/>{a}</div>
             ))}
           </div>
-          <div className="process-step" style={{marginTop:"2rem"}}><div className="step-num">3</div><div className="step-body"><h4>{t.step3T}</h4><p>{t.step3P}</p></div></div>
+          <div className="process-step" style={{marginTop:"2rem"}}><div className="step-num">3</div><div className="step-body"><h3>{t.step3T}</h3><p>{t.step3P}</p></div></div>
         </div>
         <div className="cs-section">
           <h2>{t.resultsTitle}</h2>
@@ -405,7 +406,7 @@ function CaseBatech({ t }) {
           <p>{t.brandP}</p>
           <div className="problems-grid">
             {t.problems.map((p,i)=>(
-              <div className="problem-item" key={i}><span className="problem-icon">✗</span><span className="problem-text">{p}</span></div>
+              <div className="problem-item" key={i}><span className="problem-icon" aria-hidden="true">✗</span><span className="problem-text">{p}</span></div>
             ))}
           </div>
         </div>
@@ -414,7 +415,7 @@ function CaseBatech({ t }) {
           <h2>{t.goalsTitle}</h2>
           <div className="goals-grid">
             {t.goals.map((g,i)=>(
-              <div className="goal-card" key={i}><div className="goal-icon">{g.icon}</div><div className="goal-title">{g.t}</div><div className="goal-desc">{g.d}</div></div>
+              <div className="goal-card" key={i}><div className="goal-icon" aria-hidden="true">{g.icon}</div><div className="goal-title">{g.t}</div><div className="goal-desc">{g.d}</div></div>
             ))}
           </div>
         </div>
@@ -448,7 +449,7 @@ function CaseBatech({ t }) {
           <p>{t.toolsP}</p>
           <div className="tools-grid">
             {t.tools.map((tl,i)=>(
-              <div className="tool-item" key={i}><div className="tool-icon">{tl.icon}</div><div className="tool-name">{tl.n}</div><div className="tool-use">{tl.u}</div></div>
+              <div className="tool-item" key={i}><div className="tool-icon" aria-hidden="true">{tl.icon}</div><div className="tool-name">{tl.n}</div><div className="tool-use">{tl.u}</div></div>
             ))}
           </div>
         </div>
@@ -514,7 +515,7 @@ function CasePromptDay({ t }) {
           <p>{t.producedP}</p>
           <div className="goals-grid">
             {t.channels.map((g,i)=>(
-              <div className="goal-card" key={i}><div className="goal-icon">{g.icon}</div><div className="goal-title">{g.t}</div><div className="goal-desc">{g.d}</div></div>
+              <div className="goal-card" key={i}><div className="goal-icon" aria-hidden="true">{g.icon}</div><div className="goal-title">{g.t}</div><div className="goal-desc">{g.d}</div></div>
             ))}
           </div>
         </div>
@@ -523,7 +524,7 @@ function CasePromptDay({ t }) {
           <h2>{t.editorialTitle}</h2>
           <div className="goals-grid">
             {t.editorial.map((g,i)=>(
-              <div className="goal-card" key={i}><div className="goal-icon">{g.icon}</div><div className="goal-title">{g.t}</div><div className="goal-desc">{g.d}</div></div>
+              <div className="goal-card" key={i}><div className="goal-icon" aria-hidden="true">{g.icon}</div><div className="goal-title">{g.t}</div><div className="goal-desc">{g.d}</div></div>
             ))}
           </div>
         </div>
@@ -560,6 +561,14 @@ export default function Portfolio() {
     try { localStorage.setItem("lang", lang); } catch { /* modo privado */ }
   }, [lang]);
 
+  useEffect(() => {
+    const base = "Francisco Carlucci · Digital Content Strategist";
+    const caseTitles = { carlucci: t.caseCarlucci.h1, batech: t.caseBatech.h1, promptday: t.casePromptday.h1 };
+    document.title = page === "home" ? base : `${caseTitles[page]} · Francisco Carlucci`;
+    const md = document.querySelector('meta[name="description"]');
+    if (md) md.setAttribute("content", t.meta.description);
+  }, [page, lang, t]);
+
   const goHome = () => setPage("home");
 
   const IMG_AVATAR = imgAvatar;
@@ -593,16 +602,17 @@ export default function Portfolio() {
 
   const navProps = { onGoHome: goHome, scrolled, t, lang, setLang };
 
-  if (page === "carlucci") return (<><style>{styles}</style><NavBar {...navProps}/><CaseCarlucci t={t.caseCarlucci}/><Footer/></>);
-  if (page === "batech") return (<><style>{styles}</style><NavBar {...navProps}/><CaseBatech t={t.caseBatech}/><Footer/></>);
-  if (page === "promptday") return (<><style>{styles}</style><NavBar {...navProps}/><CasePromptDay t={t.casePromptday}/><Footer/></>);
+  if (page === "carlucci") return (<><style>{styles}</style><NavBar {...navProps}/><main id="contenido" tabIndex={-1}><CaseCarlucci t={t.caseCarlucci}/></main><Footer/></>);
+  if (page === "batech") return (<><style>{styles}</style><NavBar {...navProps}/><main id="contenido" tabIndex={-1}><CaseBatech t={t.caseBatech}/></main><Footer/></>);
+  if (page === "promptday") return (<><style>{styles}</style><NavBar {...navProps}/><main id="contenido" tabIndex={-1}><CasePromptDay t={t.casePromptday}/></main><Footer/></>);
 
   return (
     <>
       <style>{styles}</style>
       <NavBar {...navProps}/>
 
-      <a href="#portfolio" className="skip-link" style={{position:"absolute",top:"-100px",left:0,background:"#E05453",color:"#fff",padding:"0.5rem 1rem",zIndex:200,borderRadius:"0 0 8px 0",fontWeight:700,transition:"top 0.2s"}} onFocus={e=>e.target.style.top="0"} onBlur={e=>e.target.style.top="-100px"}>{t.skip}</a>
+      <a href="#contenido" className="skip-link" style={{position:"absolute",top:"-100px",left:0,background:"#E05453",color:"#fff",padding:"0.5rem 1rem",zIndex:200,borderRadius:"0 0 8px 0",fontWeight:700,transition:"top 0.2s"}} onFocus={e=>e.target.style.top="0"} onBlur={e=>e.target.style.top="-100px"}>{t.skip}</a>
+      <main id="contenido" tabIndex={-1}>
       <div className="hero">
         <div className="hero-blob" style={{width:500,height:500,background:"#C13483",top:"-100px",right:"-100px"}}/>
         <div className="hero-blob" style={{width:400,height:400,background:"#44319A",bottom:"-80px",left:"-80px"}}/>
@@ -658,7 +668,7 @@ export default function Portfolio() {
                       <div key={j}><div className="metric-num">{m.num}</div><div className="metric-label">{m.l}</div></div>
                     ))}
                   </div>
-                  <span className="case-link" role="link" aria-label={`${t.portfolio.readCaseAria}: ${c.title}`}>{t.portfolio.readCase} <ArrowRight/></span>
+                  <button type="button" className="case-link" aria-label={`${t.portfolio.readCaseAria}: ${c.title}`} onClick={(e) => { e.stopPropagation(); setPage(c.id); }}>{t.portfolio.readCase} <ArrowRight/></button>
                 </div>
               </div>
             ))}
@@ -672,14 +682,14 @@ export default function Portfolio() {
           <h2 className="section-title syne">{t.linkedin.titlePre}<em style={{color:"#F5A623"}}>{t.linkedin.titleEm}</em></h2>
           <div className="linkedin-grid">
             <div className="linkedin-card">
-              <div className="li-visual li1">🍊</div>
-              <h4>{t.linkedin.cards[0].title}</h4>
+              <div className="li-visual li1" aria-hidden="true">🍊</div>
+              <h3>{t.linkedin.cards[0].title}</h3>
               <p>{t.linkedin.cards[0].desc}</p>
               <a href="https://www.linkedin.com/posts/franciscocarlucci_ia-tecnologaeda-vaednculoshumanos-ugcPost-7369285686132219905-jf4a" target="_blank" rel="noreferrer" className="li-link">{t.linkedin.viewPost}</a>
             </div>
             <div className="linkedin-card">
-              <div className="li-visual li2">💬</div>
-              <h4>{t.linkedin.cards[1].title}</h4>
+              <div className="li-visual li2" aria-hidden="true">💬</div>
+              <h3>{t.linkedin.cards[1].title}</h3>
               <p>{t.linkedin.cards[1].desc}</p>
               <a href="https://www.linkedin.com/feed/update/urn:li:activity:7394707279264018432" target="_blank" rel="noreferrer" className="li-link">{t.linkedin.viewPost}</a>
             </div>
@@ -725,6 +735,7 @@ export default function Portfolio() {
           </div>
         </div>
       </section>
+      </main>
 
       <Footer/>
     </>

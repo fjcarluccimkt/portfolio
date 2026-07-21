@@ -7,6 +7,8 @@ import imgCaseCarlucci from './assets/case-carlucci.webp';
 import imgCaseBatech from './assets/case-batech.webp';
 import imgCasePromptday from './assets/case-promptday.webp';
 import serpVideo from './assets/serp-carlucci.mp4';
+import contenido1 from './assets/contenido-1.mp4';
+import contenido2 from './assets/contenido-2.mp4';
 
 const styles = `
 
@@ -365,6 +367,14 @@ function CaseCarlucci({ t }) {
             ))}
           </div>
           <div className="process-step" style={{marginTop:"2rem"}}><div className="step-num">3</div><div className="step-body"><h3>{t.step3T}</h3><p>{t.step3P}</p></div></div>
+          <div className="video-block" style={{marginTop:"2rem"}}>
+            <div className="video-label">{t.contentLabel}</div>
+            <div style={{display:"flex",gap:"1rem",justifyContent:"center",flexWrap:"wrap",marginTop:"0.75rem"}}>
+              <video src={contenido1} autoPlay loop muted playsInline preload="metadata" onCanPlay={(e) => { e.target.play().catch(() => {}); }} width="368" height="660" aria-label={t.contentCaption} style={{width:"min(260px, 45%)",height:"auto",borderRadius:"14px",display:"block"}}/>
+              <video src={contenido2} autoPlay loop muted playsInline preload="metadata" onCanPlay={(e) => { e.target.play().catch(() => {}); }} width="296" height="526" aria-label={t.contentCaption} style={{width:"min(260px, 45%)",height:"auto",borderRadius:"14px",display:"block"}}/>
+            </div>
+            <p style={{fontSize:"0.85rem",color:"rgba(255,255,255,0.85)",marginTop:"0.75rem",lineHeight:1.5}}>{t.contentCaption}</p>
+          </div>
         </div>
         <div className="cs-section">
           <h2>{t.resultsTitle}</h2>
@@ -375,8 +385,8 @@ function CaseCarlucci({ t }) {
           </div>
           <div className="video-block" style={{marginTop:"2rem"}}>
             <div className="video-label">{t.serpLabel}</div>
-            <video src={serpVideo} autoPlay loop muted playsInline preload="metadata" width="768" height="432" aria-label={t.serpCaption} style={{width:"100%",height:"auto",borderRadius:"14px",display:"block",border:"1px solid #eee"}}/>
-            <p style={{fontSize:"0.85rem",color:"#666",marginTop:"0.6rem"}}>{t.serpCaption}</p>
+            <video src={serpVideo} autoPlay loop muted playsInline preload="metadata" onCanPlay={(e) => { e.target.play().catch(() => {}); }} width="768" height="432" aria-label={t.serpCaption} style={{width:"100%",height:"auto",borderRadius:"14px",display:"block",border:"1px solid #eee"}}/>
+            <p style={{fontSize:"0.85rem",color:"rgba(255,255,255,0.85)",marginTop:"0.6rem",lineHeight:1.5}}>{t.serpCaption}</p>
           </div>
           <div className="final-statement" style={{marginTop:"2rem"}}>
             <h3>{t.finalT}</h3>

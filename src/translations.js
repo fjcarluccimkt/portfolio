@@ -120,6 +120,8 @@ export const STR = {
       serpLabel: "🔍 La marca, en la primera página de Google",
       serpCaption: "Demostración real: al buscar inmobiliarias de la zona, Carlucci Propiedades aparece posicionada en la primera página de Google de forma orgánica — resultado directo de la estrategia SEO y de contenidos.",
       step3T: "Contenido de valor",
+      contentLabel: "📱 Contenido real producido para la marca",
+      contentCaption: "Piezas audiovisuales para redes sociales: house tours y contenido de propiedades que sostienen la presencia digital de la marca.",
       step3P: "Plan de marketing con contenido visual y audiovisual estratégico: videos, house tours, fotos profesionales, blog SEO, publicaciones programadas y gestión activa de la comunidad en redes sociales.",
       resultsTitle: "Resultados",
       results: [
@@ -349,6 +351,8 @@ export const STR = {
       serpLabel: "🔍 The brand on Google's first page",
       serpCaption: "Live demonstration: searching for real estate agencies in the area shows Carlucci Propiedades ranking organically on Google's first page — a direct result of the SEO and content strategy.",
       step3T: "Valuable content",
+      contentLabel: "📱 Real content produced for the brand",
+      contentCaption: "Audiovisual pieces for social media: house tours and property content that sustain the brand's digital presence.",
       step3P: "A marketing plan built on strategic visual and audiovisual content: videos, house tours, professional photography, SEO blogging, scheduled publishing and active community management on social media.",
       resultsTitle: "Results",
       results: [

@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { STR } from "./translations";
 import imgLogoAnterior from './assets/logo-anterior.webp';
 import imgLogoRedisenio from './assets/logo-redisenio.webp';
@@ -285,6 +285,21 @@ const styles = `
   }
 `;
 
+const AutoVideo = (props) => {
+  const ref = useRef(null);
+  useEffect(() => {
+    const v = ref.current;
+    if (!v || typeof IntersectionObserver === "undefined") return;
+    const io = new IntersectionObserver(([e]) => {
+      if (e.isIntersecting) v.play().catch(() => {});
+      else v.pause();
+    }, { threshold: 0.25 });
+    io.observe(v);
+    return () => io.disconnect();
+  }, []);
+  return <video ref={ref} autoPlay loop muted playsInline preload="metadata" {...props} />;
+};
+
 const ArrowRight = () => (
   <svg width="16" height="16" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
     <path d="M5 12h14M12 5l7 7-7 7"/>
@@ -377,8 +392,8 @@ function CaseCarlucci({ t }) {
           <div className="video-block" style={{marginTop:"2rem"}}>
             <div className="video-label">{t.contentLabel}</div>
             <div style={{display:"flex",gap:"1rem",justifyContent:"center",flexWrap:"wrap",marginTop:"0.75rem"}}>
-              <video src={contenido1} autoPlay loop muted playsInline preload="metadata" onCanPlay={(e) => { e.target.play().catch(() => {}); }} width="368" height="660" aria-label={t.contentCaption} style={{width:"min(260px, 45%)",height:"auto",borderRadius:"14px",display:"block"}}/>
-              <video src={contenido2} autoPlay loop muted playsInline preload="metadata" onCanPlay={(e) => { e.target.play().catch(() => {}); }} width="296" height="526" aria-label={t.contentCaption} style={{width:"min(260px, 45%)",height:"auto",borderRadius:"14px",display:"block"}}/>
+              <AutoVideo src={contenido1} width="368" height="660" aria-label={t.contentCaption} style={{width:"min(260px, 45%)",height:"auto",borderRadius:"14px",display:"block"}}/>
+              <AutoVideo src={contenido2} width="296" height="526" aria-label={t.contentCaption} style={{width:"min(260px, 45%)",height:"auto",borderRadius:"14px",display:"block"}}/>
             </div>
             <p style={{fontSize:"0.85rem",color:"rgba(255,255,255,0.85)",marginTop:"0.75rem",lineHeight:1.5}}>{t.contentCaption}</p>
           </div>
@@ -392,7 +407,7 @@ function CaseCarlucci({ t }) {
           </div>
           <div className="video-block" style={{marginTop:"2rem"}}>
             <div className="video-label">{t.serpLabel}</div>
-            <video src={serpVideo} autoPlay loop muted playsInline preload="metadata" onCanPlay={(e) => { e.target.play().catch(() => {}); }} width="768" height="432" aria-label={t.serpCaption} style={{width:"100%",height:"auto",borderRadius:"14px",display:"block",border:"1px solid #eee"}}/>
+            <AutoVideo src={serpVideo} width="768" height="432" aria-label={t.serpCaption} style={{width:"100%",height:"auto",borderRadius:"14px",display:"block",border:"1px solid #eee"}}/>
             <p style={{fontSize:"0.85rem",color:"rgba(255,255,255,0.85)",marginTop:"0.6rem",lineHeight:1.5}}>{t.serpCaption}</p>
           </div>
           <div className="final-statement" style={{marginTop:"2rem"}}>

@@ -793,6 +793,7 @@ export default function Portfolio() {
             <a href="mailto:fjcarlucci.mkt@gmail.com" className="contact-link" aria-label={t.contact.ariaEmail}>✉️ fjcarlucci.mkt@gmail.com</a>
             <a href="tel:+34615445794" className="contact-link" aria-label={t.contact.ariaPhone}>📞 +34 615 445 794</a>
             <a href="https://www.linkedin.com/in/franciscocarlucci" target="_blank" rel="noreferrer" className="contact-link" aria-label={t.contact.ariaLinkedin}>💼 LinkedIn</a>
+            <a href="/cv-francisco-carlucci.pdf" download="CV-Francisco-Carlucci.pdf" className="contact-link" aria-label={t.contact.ariaCv}>{t.contact.cv}</a>
           </div>
         </div>
       </section>

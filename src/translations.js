@@ -83,6 +83,8 @@ export const STR = {
       ariaEmail: "Enviar email a fjcarlucci.mkt@gmail.com",
       ariaPhone: "Llamar al +34 615 445 794",
       ariaLinkedin: "Visitar perfil de LinkedIn de Francisco Carlucci",
+      cv: "📄 Descargar CV",
+      ariaCv: "Descargar el CV de Francisco Carlucci en PDF",
     },
     caseCarlucci: {
       tag: "Real Estate · Marketing Digital",
@@ -316,6 +318,8 @@ export const STR = {
       ariaEmail: "Email fjcarlucci.mkt@gmail.com",
       ariaPhone: "Call +34 615 445 794",
       ariaLinkedin: "Visit Francisco Carlucci's LinkedIn profile",
+      cv: "📄 Download CV",
+      ariaCv: "Download Francisco Carlucci's CV as PDF",
     },
     caseCarlucci: {
       tag: "Real Estate · Digital Marketing",

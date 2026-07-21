@@ -578,7 +578,12 @@ function CasePromptDay({ t }) {
 }
 
 export default function Portfolio() {
-  const [page, setPage] = useState("home");
+  const CASE_IDS = ["carlucci", "batech", "promptday"];
+  const [page, setPage] = useState(() => {
+    if (typeof window === "undefined") return "home";
+    const h = window.location.hash.replace(/^#\/?/, "");
+    return CASE_IDS.includes(h) ? h : "home";
+  });
   const [scrolled, setScrolled] = useState(false);
   const [lang, setLang] = useState(() => {
     try { return localStorage.getItem("lang") === "en" ? "en" : "es"; } catch { return "es"; }
@@ -593,6 +598,24 @@ export default function Portfolio() {
   }, []);
 
   useEffect(() => { window.scrollTo(0, 0); }, [page]);
+
+  useEffect(() => {
+    const onHash = () => {
+      const h = window.location.hash.replace(/^#\/?/, "");
+      setPage(CASE_IDS.includes(h) ? h : "home");
+    };
+    window.addEventListener("hashchange", onHash);
+    return () => window.removeEventListener("hashchange", onHash);
+  }, []);
+
+  useEffect(() => {
+    const cur = window.location.hash.replace(/^#\/?/, "");
+    if (page !== "home") {
+      if (cur !== page) history.pushState(null, "", "#/" + page);
+    } else if (CASE_IDS.includes(cur)) {
+      history.pushState(null, "", window.location.pathname);
+    }
+  }, [page]);
 
   useEffect(() => {
     document.documentElement.lang = lang;

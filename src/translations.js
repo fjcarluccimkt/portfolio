@@ -136,7 +136,7 @@ export const STR = {
       finalP: "Carlucci Propiedades pasó de ser una inmobiliaria tradicional a una marca digital referente en su zona. La combinación de rebranding, SEO y contenido de valor generó un crecimiento sostenido y posicionó la marca en el top de búsquedas locales.",
     },
     caseBatech: {
-      badge: "📚 Proyecto académico aplicado · Posgrado UPF / Tecnocampus",
+      badge: "📚 Proyecto académico · UPF / Tecnocampus",
       tag: "Marketing Digital · IA · E-commerce",
       h1: "IA y estrategia 360° para escalar una marca de moda tecnológica",
       desc: "Plan de marketing digital integral para BATECH, marca catalana de moda masculina tecnológica. Desarrollado como proyecto final del Posgrado en Marketing Digital e Inteligencia Artificial de la Universitat Pompeu Fabra / Tecnocampus.",
@@ -369,7 +369,7 @@ export const STR = {
       finalP: "Carlucci Propiedades went from being a traditional real estate agency to a digital benchmark in its area. The combination of rebranding, SEO and valuable content drove sustained growth and positioned the brand at the top of local searches.",
     },
     caseBatech: {
-      badge: "📚 Applied academic project · UPF / Tecnocampus Postgraduate Degree",
+      badge: "📚 Academic project · UPF / Tecnocampus",
       tag: "Digital Marketing · AI · E-commerce",
       h1: "AI and a 360° strategy to scale a tech fashion brand",
       desc: "End-to-end digital marketing plan for BATECH, a Catalan tech menswear brand. Developed as the capstone project for the Postgraduate Degree in Digital Marketing & Artificial Intelligence at Universitat Pompeu Fabra / Tecnocampus.",

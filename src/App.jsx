@@ -78,7 +78,7 @@ const styles = `
   .hero-left > *:nth-child(4) { animation-delay: 0.4s; }
   .hero-left > *:nth-child(5) { animation-delay: 0.5s; }
   @keyframes riseIn { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
-  .hero-badge { display: inline-flex; align-items: center; gap: 0.5rem; background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.4); border-radius: 100px; padding: 0.4rem 1rem; font-size: 0.8rem; color: #ffffff; font-weight: 600; margin-bottom: 1.5rem; }
+  .hero-badge { display: inline-flex; align-items: center; gap: 0.5rem; background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.4); border-radius: 100px; padding: 0.4rem 1rem; font-size: 0.8rem; color: #ffffff; font-weight: 600; margin-bottom: 1.5rem; margin-right: 0.75rem; }
   .hero-badge::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: #22C55E; display: block; animation: pulse 2s infinite; }
   @keyframes pulse { 0%,100%{opacity:1}50%{opacity:0.4} }
   .hero h1 { font-family: 'Baloo 2', sans-serif; font-size: clamp(2.8rem, 5vw, 4.2rem); font-weight: 800; line-height: 1.04; letter-spacing: -0.01em; color: #fff; margin-bottom: 1.5rem; }
@@ -267,7 +267,7 @@ const styles = `
   .final-statement { background: linear-gradient(135deg, #E05453, #C13483, #7A2CA4); background-size: 200% 200%; animation: heroShift 12s ease-in-out infinite alternate; border-radius: 24px; padding: 3rem; color: #fff; text-align: center; margin-top: 1.5rem; box-shadow: 0 20px 48px rgba(193,52,131,0.25); }
   .final-statement h3 { font-family: 'Baloo 2', sans-serif; font-size: 1.5rem; font-weight: 800; margin-bottom: 1rem; }
   .final-statement p { font-size: 0.95rem; line-height: 1.7; color: rgba(255,255,255,0.95); font-weight: 400; }
-  .academic-badge { display: inline-flex; align-items: center; gap: 0.5rem; background: rgba(255,255,255,0.14); border: 1px solid rgba(255,255,255,0.35); border-radius: 100px; padding: 0.4rem 1rem; font-size: 0.8rem; color: #ffffff; font-weight: 600; margin-bottom: 1.5rem; }
+  .academic-badge { display: inline-flex; align-items: center; gap: 0.5rem; background: rgba(255,255,255,0.14); border: 1px solid rgba(255,255,255,0.35); border-radius: 100px; padding: 0.4rem 1rem; font-size: 0.8rem; color: #ffffff; font-weight: 600; margin-bottom: 1.5rem; margin-right: 0.75rem; }
 
   @media (max-width: 768px) {
     nav { padding: 1rem 1.5rem; }

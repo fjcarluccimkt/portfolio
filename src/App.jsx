@@ -57,6 +57,14 @@ const styles = `
   button.case-link { background: none; border: 0; padding: 0; font: inherit; text-align: left; cursor: pointer; }
   button.case-link:focus-visible, .lang-toggle button:focus-visible { outline: 2px solid #E05453; outline-offset: 3px; border-radius: 4px; }
   .nav-links a:hover::after { width: 100%; }
+  .nav-toggle { display: none; flex-direction: column; justify-content: center; gap: 5px; width: 44px; height: 44px; background: none; border: 0; cursor: pointer; padding: 0; z-index: 120; }
+  .nav-toggle-bar { display: block; width: 24px; height: 2px; background: #fff; border-radius: 2px; margin: 0 auto; transition: transform 0.3s, opacity 0.2s; }
+  .nav-toggle-bar.o:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .nav-toggle-bar.o:nth-child(2) { opacity: 0; }
+  .nav-toggle-bar.o:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+  .nav-toggle:focus-visible { outline: 2px solid #E05453; outline-offset: 2px; border-radius: 6px; }
+  .nav-lang-mobile { display: none; }
+  .nav-overlay { display: none; }
 
   .hero {
     min-height: 100vh;
@@ -271,6 +279,20 @@ const styles = `
 
   @media (max-width: 768px) {
     nav { padding: 1rem 1.5rem; }
+    .nav-toggle { display: flex; }
+    .nav-lang-mobile { display: flex; margin-left: auto; margin-right: 1rem; }
+    .nav-lang-desktop { display: none; }
+    .nav-links {
+      position: fixed; top: 0; right: 0; bottom: 0; width: min(75vw, 300px);
+      flex-direction: column; justify-content: center; align-items: flex-start;
+      gap: 2rem; padding: 2rem 2.5rem; z-index: 110;
+      background: linear-gradient(160deg, #C13483 0%, #7A2CA4 55%, #44319A 100%);
+      transform: translateX(100%); transition: transform 0.32s cubic-bezier(0.22,1,0.36,1);
+      box-shadow: -8px 0 30px rgba(0,0,0,0.25);
+    }
+    .nav-links.open { transform: translateX(0); }
+    .nav-links a { font-size: 1.15rem; font-weight: 600; }
+    .nav-overlay { display: block; position: fixed; inset: 0; z-index: 105; background: rgba(0,0,0,0.4); border: 0; cursor: pointer; }
     section { padding: 4rem 1.5rem; }
     .hero { padding: 6rem 1.5rem 3rem; }
     .hero-content { grid-template-columns: 1fr; gap: 2.5rem; }
@@ -307,20 +329,50 @@ const ArrowRight = () => (
 );
 
 function NavBar({ onGoHome, scrolled, t, lang, setLang }) {
+  const [open, setOpen] = useState(false);
+  const close = () => setOpen(false);
+
+  useEffect(() => {
+    const onKey = (e) => { if (e.key === "Escape") setOpen(false); };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, []);
+
+  useEffect(() => {
+    document.body.style.overflow = open ? "hidden" : "";
+    return () => { document.body.style.overflow = ""; };
+  }, [open]);
+
+  const goHomeAndClose = () => { onGoHome(); close(); };
+
   return (
     <nav style={{ boxShadow: scrolled ? "0 2px 20px rgba(0,0,0,0.08)" : "none" }}>
-      <div className="nav-brand syne" onClick={onGoHome}>FRANCISCO<br/><span>CARLUCCI</span></div>
-      <ul className="nav-links">
-        <li><a href="#sobre-mi" onClick={onGoHome}>{t.nav.about}</a></li>
-        <li><a href="#portfolio" onClick={onGoHome}>{t.nav.cases}</a></li>
-        <li><a href="#contacto" onClick={onGoHome}>{t.nav.contact}</a></li>
-        <li>
+      <div className="nav-brand syne" onClick={goHomeAndClose}>FRANCISCO<br/><span>CARLUCCI</span></div>
+
+      <div className="lang-toggle nav-lang-mobile" role="group" aria-label="Idioma / Language">
+        <button type="button" className={lang === "es" ? "active" : ""} aria-pressed={lang === "es"} onClick={() => setLang("es")}>ES</button>
+        <button type="button" className={lang === "en" ? "active" : ""} aria-pressed={lang === "en"} onClick={() => setLang("en")}>EN</button>
+      </div>
+
+      <button type="button" className="nav-toggle" aria-label={open ? "Cerrar menú" : "Abrir menú"} aria-expanded={open} aria-controls="nav-menu" onClick={() => setOpen(v => !v)}>
+        <span className={`nav-toggle-bar${open ? " o" : ""}`}/>
+        <span className={`nav-toggle-bar${open ? " o" : ""}`}/>
+        <span className={`nav-toggle-bar${open ? " o" : ""}`}/>
+      </button>
+
+      <ul id="nav-menu" className={`nav-links${open ? " open" : ""}`}>
+        <li><a href="#sobre-mi" onClick={goHomeAndClose}>{t.nav.about}</a></li>
+        <li><a href="#portfolio" onClick={goHomeAndClose}>{t.nav.cases}</a></li>
+        <li><a href="#contacto" onClick={goHomeAndClose}>{t.nav.contact}</a></li>
+        <li className="nav-lang-desktop">
           <div className="lang-toggle" role="group" aria-label="Idioma / Language">
             <button type="button" className={lang === "es" ? "active" : ""} aria-pressed={lang === "es"} onClick={() => setLang("es")}>ES</button>
             <button type="button" className={lang === "en" ? "active" : ""} aria-pressed={lang === "en"} onClick={() => setLang("en")}>EN</button>
           </div>
         </li>
       </ul>
+
+      {open && <button type="button" className="nav-overlay" aria-label="Cerrar menú" onClick={close}/>}
     </nav>
   );
 }

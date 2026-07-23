@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { STR } from "./translations";
+import { POSTS } from "./posts";
 import imgLogoAnterior from './assets/logo-anterior.webp';
 import imgLogoRedisenio from './assets/logo-redisenio.webp';
 import imgAvatar from './assets/avatar.webp';
@@ -146,6 +147,25 @@ const styles = `
 
   .linkedin-section { background: #1A1A2E; }
   .linkedin-section .section-title { color: #fff; }
+
+  .blog-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1.5rem; margin-top: 2.5rem; }
+  .blog-card { text-align: left; background: #fff; border: 1px solid #eee; border-radius: 18px; padding: 1.75rem; cursor: pointer; transition: transform 0.2s, box-shadow 0.2s; display: flex; flex-direction: column; gap: 0.75rem; font: inherit; }
+  .blog-card:hover { transform: translateY(-4px); box-shadow: 0 14px 34px rgba(0,0,0,0.08); }
+  .blog-card:focus-visible { outline: 2px solid #E05453; outline-offset: 3px; }
+  .blog-emoji { font-size: 2rem; }
+  .blog-meta { font-size: 0.75rem; color: #999; text-transform: uppercase; letter-spacing: 0.08em; }
+  .blog-card h3 { font-family: 'Baloo 2', sans-serif; font-size: 1.2rem; font-weight: 800; line-height: 1.25; color: #1A1A2E; }
+  .blog-card p { font-size: 0.9rem; line-height: 1.6; color: #666; }
+  .blog-readmore { margin-top: auto; font-size: 0.85rem; font-weight: 700; color: #E05453; }
+  .post-body { max-width: 720px; }
+  .post-body h2 { font-family: 'Baloo 2', sans-serif; font-size: 1.5rem; font-weight: 800; color: #1A1A2E; margin: 2rem 0 0.75rem; }
+  .post-body h3 { font-family: 'Baloo 2', sans-serif; font-size: 1.2rem; font-weight: 700; color: #1A1A2E; margin: 1.5rem 0 0.5rem; }
+  .post-body p { font-size: 1.05rem; line-height: 1.8; color: #333; margin-bottom: 1.1rem; }
+  .post-body ul { margin: 0 0 1.1rem 1.25rem; }
+  .post-body li { font-size: 1.05rem; line-height: 1.8; color: #333; margin-bottom: 0.4rem; }
+  .post-body a { color: #C13483; }
+  .post-back { background: none; border: 0; font: inherit; font-weight: 700; color: #E05453; cursor: pointer; padding: 0; }
+  .post-back:focus-visible { outline: 2px solid #E05453; outline-offset: 3px; border-radius: 4px; }
   .linkedin-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px,1fr)); gap: 1.5rem; margin-top: 3rem; }
   .linkedin-card { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); border-radius: 20px; padding: 1.75rem; transition: background 0.2s; }
   .linkedin-card:hover { background: rgba(255,255,255,0.1); }
@@ -328,6 +348,78 @@ const ArrowRight = () => (
   </svg>
 );
 
+// Formato inline seguro: **negrita** y [texto](url). Sin dangerouslySetInnerHTML.
+function inlineMd(text, keyPrefix) {
+  const nodes = [];
+  let rest = text;
+  let i = 0;
+  const re = /\*\*(.+?)\*\*|\[(.+?)\]\((https?:\/\/[^\s)]+)\)/;
+  let m;
+  while ((m = re.exec(rest))) {
+    if (m.index > 0) nodes.push(rest.slice(0, m.index));
+    if (m[1] !== undefined) {
+      nodes.push(<strong key={`${keyPrefix}-b${i}`}>{m[1]}</strong>);
+    } else {
+      nodes.push(<a key={`${keyPrefix}-a${i}`} href={m[3]} target="_blank" rel="noreferrer">{m[2]}</a>);
+    }
+    rest = rest.slice(m.index + m[0].length);
+    i++;
+  }
+  if (rest) nodes.push(rest);
+  return nodes;
+}
+
+function Markdown({ text }) {
+  const lines = text.split("\n");
+  const blocks = [];
+  let list = null;
+  lines.forEach((raw, idx) => {
+    const line = raw.trim();
+    if (line.startsWith("- ")) {
+      if (!list) list = [];
+      list.push(<li key={`li${idx}`}>{inlineMd(line.slice(2), `li${idx}`)}</li>);
+      return;
+    }
+    if (list) { blocks.push(<ul key={`ul${idx}`}>{list}</ul>); list = null; }
+    if (!line) return;
+    if (line.startsWith("### ")) blocks.push(<h3 key={idx}>{inlineMd(line.slice(4), `h${idx}`)}</h3>);
+    else if (line.startsWith("## ")) blocks.push(<h2 key={idx}>{inlineMd(line.slice(3), `h${idx}`)}</h2>);
+    else blocks.push(<p key={idx}>{inlineMd(line, `p${idx}`)}</p>);
+  });
+  if (list) blocks.push(<ul key="ul-last">{list}</ul>);
+  return <>{blocks}</>;
+}
+
+function fmtDate(iso, lang) {
+  try {
+    return new Date(iso + "T00:00:00").toLocaleDateString(lang === "en" ? "en-US" : "es-ES", { year: "numeric", month: "long", day: "numeric" });
+  } catch { return iso; }
+}
+
+function BlogPost({ post, lang, t, onOpen, onBack }) {
+  const c = post[lang];
+  return (
+    <div className="case-page">
+      <div className="case-hero" style={{ background: `linear-gradient(160deg, ${post.accent} 0%, #C13483 45%, #7A2CA4 80%, #44319A 100%)` }}>
+        <div className="case-hero-blob" style={{width:"360px",height:"360px",background:post.accent,top:"-90px",right:"-70px"}}/>
+        <div className="case-hero-inner">
+          <div className="case-tag" style={{ marginBottom: "1.25rem", background: "rgba(255,255,255,0.16)", color: "#fff" }}>{c.tag}</div>
+          <h1>{c.title}</h1>
+          <p className="case-hero-desc" style={{ marginTop: "1rem", opacity: 0.9 }}>{fmtDate(post.date, lang)} · {c.readingTime}</p>
+        </div>
+      </div>
+      <div className="case-content">
+        <article className="post-body">
+          <Markdown text={c.body} />
+        </article>
+        <p style={{ marginTop: "2.5rem" }}>
+          <button type="button" className="post-back" onClick={onBack}>{t.blog.back}</button>
+        </p>
+      </div>
+    </div>
+  );
+}
+
 function NavBar({ onGoHome, scrolled, t, lang, setLang }) {
   const [open, setOpen] = useState(false);
   const close = () => setOpen(false);
@@ -363,6 +455,7 @@ function NavBar({ onGoHome, scrolled, t, lang, setLang }) {
       <ul id="nav-menu" className={`nav-links${open ? " open" : ""}`}>
         <li><a href="#sobre-mi" onClick={goHomeAndClose}>{t.nav.about}</a></li>
         <li><a href="#portfolio" onClick={goHomeAndClose}>{t.nav.cases}</a></li>
+        <li><a href="#blog" onClick={goHomeAndClose}>{t.nav.blog}</a></li>
         <li><a href="#contacto" onClick={goHomeAndClose}>{t.nav.contact}</a></li>
         <li className="nav-lang-desktop">
           <div className="lang-toggle" role="group" aria-label="Idioma / Language">
@@ -631,11 +724,15 @@ function CasePromptDay({ t }) {
 
 export default function Portfolio() {
   const CASE_IDS = ["carlucci", "batech", "promptday"];
-  const [page, setPage] = useState(() => {
-    if (typeof window === "undefined") return "home";
+  const POST_SLUGS = POSTS.map(p => p.slug);
+  const routeFromHash = () => {
     const h = window.location.hash.replace(/^#\/?/, "");
-    return CASE_IDS.includes(h) ? h : "home";
-  });
+    if (CASE_IDS.includes(h)) return h;
+    const bm = h.match(/^blog\/(.+)$/);
+    if (bm && POST_SLUGS.includes(bm[1])) return "post:" + bm[1];
+    return "home";
+  };
+  const [page, setPage] = useState(() => (typeof window === "undefined" ? "home" : routeFromHash()));
   const [scrolled, setScrolled] = useState(false);
   const [lang, setLang] = useState(() => {
     try { return localStorage.getItem("lang") === "en" ? "en" : "es"; } catch { return "es"; }
@@ -652,19 +749,17 @@ export default function Portfolio() {
   useEffect(() => { window.scrollTo(0, 0); }, [page]);
 
   useEffect(() => {
-    const onHash = () => {
-      const h = window.location.hash.replace(/^#\/?/, "");
-      setPage(CASE_IDS.includes(h) ? h : "home");
-    };
+    const onHash = () => setPage(routeFromHash());
     window.addEventListener("hashchange", onHash);
     return () => window.removeEventListener("hashchange", onHash);
   }, []);
 
   useEffect(() => {
     const cur = window.location.hash.replace(/^#\/?/, "");
+    const target = page.startsWith("post:") ? "blog/" + page.slice(5) : page;
     if (page !== "home") {
-      if (cur !== page) history.pushState(null, "", "#/" + page);
-    } else if (CASE_IDS.includes(cur)) {
+      if (cur !== target) history.pushState(null, "", "#/" + target);
+    } else if (CASE_IDS.includes(cur) || cur.startsWith("blog/")) {
       history.pushState(null, "", window.location.pathname);
     }
   }, [page]);
@@ -677,7 +772,14 @@ export default function Portfolio() {
   useEffect(() => {
     const base = "Francisco Carlucci · Digital Content Strategist";
     const caseTitles = { carlucci: t.caseCarlucci.h1, batech: t.caseBatech.h1, promptday: t.casePromptday.h1 };
-    document.title = page === "home" ? base : `${caseTitles[page]} · Francisco Carlucci`;
+    let title = base;
+    if (page.startsWith("post:")) {
+      const p = POSTS.find(x => x.slug === page.slice(5));
+      if (p) title = `${p[lang].title} · Francisco Carlucci`;
+    } else if (caseTitles[page]) {
+      title = `${caseTitles[page]} · Francisco Carlucci`;
+    }
+    document.title = title;
     const md = document.querySelector('meta[name="description"]');
     if (md) md.setAttribute("content", t.meta.description);
   }, [page, lang, t]);
@@ -718,6 +820,10 @@ export default function Portfolio() {
   if (page === "carlucci") return (<><style>{styles}</style><NavBar {...navProps}/><main id="contenido" tabIndex={-1}><CaseCarlucci t={t.caseCarlucci}/></main><Footer/></>);
   if (page === "batech") return (<><style>{styles}</style><NavBar {...navProps}/><main id="contenido" tabIndex={-1}><CaseBatech t={t.caseBatech}/></main><Footer/></>);
   if (page === "promptday") return (<><style>{styles}</style><NavBar {...navProps}/><main id="contenido" tabIndex={-1}><CasePromptDay t={t.casePromptday}/></main><Footer/></>);
+  if (page.startsWith("post:")) {
+    const post = POSTS.find(x => x.slug === page.slice(5));
+    if (post) return (<><style>{styles}</style><NavBar {...navProps}/><main id="contenido" tabIndex={-1}><BlogPost post={post} lang={lang} t={t} onBack={() => setPage("home")}/></main><Footer/></>);
+  }
 
   return (
     <>
@@ -807,6 +913,32 @@ export default function Portfolio() {
               <a href="https://www.linkedin.com/feed/update/urn:li:activity:7394707279264018432" target="_blank" rel="noreferrer" className="li-link">{t.linkedin.viewPost}</a>
             </div>
           </div>
+        </div>
+      </section>
+
+      <section id="blog" style={{background:"#FAFAF7"}}>
+        <div className="section-inner">
+          <span className="section-label">{t.blog.label}</span>
+          <h2 className="section-title syne">{t.blog.titlePre}<em>{t.blog.titleEm}</em></h2>
+          <p style={{color:"#666",maxWidth:"600px",marginTop:"0.5rem"}}>{t.blog.intro}</p>
+          {POSTS.length === 0 ? (
+            <p style={{color:"#999",marginTop:"2rem"}}>{t.blog.empty}</p>
+          ) : (
+            <div className="blog-grid">
+              {[...POSTS].sort((a,b) => b.date.localeCompare(a.date)).map((post) => {
+                const c = post[lang];
+                return (
+                  <button type="button" className="blog-card" key={post.slug} onClick={() => setPage("post:" + post.slug)} aria-label={`${t.blog.readMore}: ${c.title}`}>
+                    <div className="blog-emoji" aria-hidden="true">{post.emoji}</div>
+                    <div className="blog-meta">{c.tag} · {fmtDate(post.date, lang)}</div>
+                    <h3>{c.title}</h3>
+                    <p>{c.excerpt}</p>
+                    <span className="blog-readmore">{t.blog.readMore} →</span>
+                  </button>
+                );
+              })}
+            </div>
+          )}
         </div>
       </section>
 

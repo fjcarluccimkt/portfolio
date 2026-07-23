@@ -1,7 +1,7 @@
 export const STR = {
   es: {
     meta: { description: "Social Media Manager y Content Creator en Barcelona. Más de 10 años construyendo presencia digital con estrategia, contenido e inteligencia artificial aplicada." },
-    nav: { about: "Sobre mí", cases: "Casos de estudio", contact: "Contacto" },
+    nav: { about: "Sobre mí", cases: "Casos de estudio", blog: "Blog", contact: "Contacto" },
     skip: "Saltar al contenido",
     hero: {
       badge: "Disponible para proyectos",
@@ -57,6 +57,16 @@ export const STR = {
           desc: 'Video reflexivo sobre cómo la inteligencia artificial empieza a ocupar espacios emocionales, y por qué la pregunta clave no es si la IA nos "quiere", sino por qué queremos que lo haga.',
         },
       ],
+    },
+    blog: {
+      label: "Blog",
+      titlePre: "Notas y ",
+      titleEm: "reflexiones",
+      intro: "Ideas sobre marketing digital, contenido e inteligencia artificial aplicada.",
+      readMore: "Leer nota",
+      back: "← Volver al blog",
+      backHome: "← Volver al inicio",
+      empty: "Pronto: primeras notas.",
     },
     about: {
       label: "Sobre mí",
@@ -235,7 +245,7 @@ export const STR = {
 
   en: {
     meta: { description: "Social Media Manager and Content Creator in Barcelona. 10+ years building digital presence through strategy, content and applied artificial intelligence." },
-    nav: { about: "About me", cases: "Case studies", contact: "Contact" },
+    nav: { about: "About me", cases: "Case studies", blog: "Blog", contact: "Contact" },
     skip: "Skip to content",
     hero: {
       badge: "Available for projects",
@@ -291,6 +301,16 @@ export const STR = {
           desc: "A reflective video on how artificial intelligence is beginning to occupy emotional spaces, and why the key question isn't whether AI \"loves\" us, but why we want it to.",
         },
       ],
+    },
+    blog: {
+      label: "Blog",
+      titlePre: "Notes and ",
+      titleEm: "thoughts",
+      intro: "Ideas on digital marketing, content and applied artificial intelligence.",
+      readMore: "Read note",
+      back: "← Back to blog",
+      backHome: "← Back home",
+      empty: "Coming soon: first notes.",
     },
     about: {
       label: "About me",

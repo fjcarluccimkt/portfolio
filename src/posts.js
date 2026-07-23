@@ -5,6 +5,90 @@
 
 export const POSTS = [
   {
+    slug: "ahorrar-tokens-claude",
+    date: "2026-06-20",
+    emoji: "🪙",
+    accent: "#7A2CA4",
+    es: {
+      tag: "IA · Productividad",
+      title: "Cómo ahorrar tokens en Claude (y por qué tus conversaciones largas rinden peor)",
+      excerpt:
+        "Claude no recuerda tu conversación: la relee entera cada vez que le escribes. Por eso, cuanto más larga, más consume y peor responde. Te cuento el método de sprints que uso para trabajar mejor con cualquier IA.",
+      readingTime: "4 min",
+      body: `Hay una idea instalada desde que ChatGPT explotó en 2022: usar siempre la misma conversación para que la IA "mantenga el contexto". Sonaba lógico. Pero con los modelos actuales —Claude especialmente— se convirtió en un arma de doble filo.
+
+## Cómo funciona la memoria de un modelo
+
+Un modelo de lenguaje no recuerda nada entre mensajes. Cada vez que le escribes, relee la conversación completa desde el principio para poder responder. No consulta un resumen ni recupera lo importante: procesa todo el hilo, de nuevo, entero.
+
+Eso tiene una consecuencia directa: cuanto más larga es la conversación, más "tokens" (las unidades con las que el modelo mide el texto) consume en cada respuesta. Y no es solo una cuestión de gasto. Cuando el hilo se satura, la calidad cae: el modelo empieza a perder el foco, mezcla instrucciones viejas con nuevas y responde peor.
+
+## La solución: trabajar por sprints
+
+En lugar de arrastrar una única mega-conversación durante días, trato cada sesión como un sprint corto y enfocado:
+
+- Cuando siento que el hilo ya cumplió su objetivo, le pido un **resumen** de lo trabajado y las decisiones tomadas.
+- Abro una **conversación nueva**.
+- Pego ese resumen como contexto inicial.
+- Sigo desde ahí, con el hilo limpio y el modelo rindiendo al máximo otra vez.
+
+El resultado es doble: gastas menos tokens y, sobre todo, el modelo vuelve a responder con precisión porque no está cargando el peso muerto de todo lo anterior.
+
+## El truco: que Claude te avise solo
+
+Lo mejor es que no tienes que estar pendiente de cuándo cortar. Puedes configurarlo una sola vez en tus preferencias de usuario con una instrucción del tipo:
+
+> "Cuando notes que el contexto de la conversación se está volviendo muy extenso y puede afectar la calidad de tus respuestas, avísame con la frase: 'Es hora de abrir un nuevo chat'."
+
+A partir de ahí, el propio modelo te avisa cuándo conviene hacer el corte. Lo configuras una vez y te olvidas.
+
+## Por qué me parece más que un ahorro
+
+Al principio lo veía solo como eficiencia de tokens. Pero cambiar a sprints cortos cambió también cómo pienso los prompts: al arrancar cada hilo con un contexto comprimido, me obligo a destilar qué importa de verdad antes de escribir. Trabajas más ordenado, no solo más barato.
+
+Y aunque el ejemplo es Claude, la lógica aplica a cualquier LLM: conversaciones cortas, contexto fresco, foco. Guárdalo, que lo vas a usar seguro.`,
+    },
+    en: {
+      tag: "AI · Productivity",
+      title: "How to save tokens in Claude (and why your long conversations perform worse)",
+      excerpt:
+        "Claude doesn't remember your conversation: it re-reads the whole thing every time you write. That's why the longer it gets, the more it costs and the worse it answers. Here's the sprint method I use to work better with any AI.",
+      readingTime: "4 min",
+      body: `There's an idea that's been around since ChatGPT blew up in 2022: always use the same conversation so the AI "keeps the context". It sounded logical. But with today's models —Claude especially— it became a double-edged sword.
+
+## How a model's memory actually works
+
+A language model remembers nothing between messages. Every time you write, it re-reads the entire conversation from the start in order to answer. It doesn't consult a summary or retrieve the key parts: it processes the whole thread, again, in full.
+
+That has a direct consequence: the longer the conversation, the more "tokens" (the units the model measures text in) it consumes on every reply. And it's not just about cost. When the thread gets saturated, quality drops: the model starts losing focus, mixes old instructions with new ones, and answers worse.
+
+## The fix: work in sprints
+
+Instead of dragging a single mega-conversation across days, I treat each session as a short, focused sprint:
+
+- When I feel the thread has done its job, I ask for a **summary** of the work and the decisions made.
+- I open a **new conversation**.
+- I paste that summary as the starting context.
+- I continue from there, with a clean thread and the model performing at its best again.
+
+The payoff is twofold: you spend fewer tokens and, above all, the model answers precisely again because it's no longer carrying the dead weight of everything before.
+
+## The trick: let Claude flag it for you
+
+The best part is you don't have to keep track of when to cut. You can set it up once in your user preferences with an instruction like:
+
+> "When you notice the conversation's context is getting too long and may affect the quality of your answers, let me know with the phrase: 'Time to open a new chat.'"
+
+From then on, the model itself tells you when it's worth breaking. Configure it once and forget about it.
+
+## Why I see it as more than savings
+
+At first I saw it purely as token efficiency. But switching to short sprints also changed how I think about prompts: starting each thread with a compressed context forces me to distill what really matters before writing. You work more clearly, not just more cheaply.
+
+And while the example is Claude, the logic applies to any LLM: short conversations, fresh context, focus. Save this one — you'll use it.`,
+    },
+  },
+  {
     slug: "pomelli-ia-marketing-pymes",
     date: "2026-02-18",
     emoji: "🍊",
